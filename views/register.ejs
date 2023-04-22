@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <form action="/register" method="POST">
+
+
+    <table>
+        <tr>
+            <td><label for="email">Email: </label></td>
+            <td><input type="text" name="email" placeholder="email"></td>
+        </tr>
+        <tr>
+            <td><label for="username">Username: </label></td>
+            <td><input type="text" name="username" placeholder="username"></td>
+        </tr>
+        <tr>
+            <td><label for="password">Password: </label></td>
+            <td><input type="password" name="password" placeholder="password"></td>
+        </tr>
+        <tr>
+            <td><label for="confirm_password">Confirm Password: </label></td>
+            <td><input type="password" name="confirm_password" placeholder="confirm password"></td>
+        </tr>
+        <tr>
+            <td><label for="master_password"> Master Password: </label></td>
+            <td><input type="password" name="master_password" placeholder="master password"></td>
+        </tr>
+        <tr>
+            <td><label for="confirm_master_password">Confirm Master Password: </label></td>
+            <td><input type="password" name="confirm_master_password" placeholder="confirm master password"></td>
+        </tr>
+        <tr>
+            <td><button type="submit">REGISTER</button></td>
+        </tr>
+        </table> 
+        
+    </form>
+    <h3><%= msg %></h3>
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

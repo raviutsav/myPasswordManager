@@ -1,0 +1,103 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+    <title> Pass Manager | <%= title %></title>
+    <style>
+        body{
+            background: url("/img/bg.png");
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(97, 93, 93, 0.5);
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 70px 0 20px 0;
+            color: #4CAF50;
+        }
+        .container {
+            margin: auto;
+            width: 40%;
+        }
+
+        input {
+            box-sizing: border-box;
+            border: 2px solid rgb(48, 162, 255);
+            border-radius: 4px;
+            
+            background-color: white;
+            background-position: 10px 10px; 
+            background-repeat: no-repeat;
+            padding: 10px 20px 10px 40px;
+        }
+        #question {
+            width: 40vw;
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding: 12px 20px 12px 40px;
+        }
+        button {
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #047007;
+            color: white;
+        }
+        #submit {
+            color: white;
+            background-color: #4CAF50;
+            border: 2px solid #4CAF50;
+        }
+        #submit:hover {
+            background-color: #047007;
+            color: white;
+        }
+        #more-option {
+            color: black;
+            border: 2px solid #4CAF50;
+            background-color: white;
+        }
+        #more-option:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+    
+        a:visited {
+            color: black;
+        }
+        @media only screen and (max-width: 600px) {
+            input {
+                width: 100%;
+                padding: 10px 20px;
+            }
+            #more-option {
+                padding: 10px 20px;
+            }
+            #submit {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+
+</head>
