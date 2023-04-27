@@ -37,8 +37,10 @@ const pool = mysql.createPool({
 app.get("/", function(req, res) {
     pool.getConnection( function (err, connection) {
         if(err) throw err
+        connection.end();
         console.log(`connected as id ${connection.threadId}`);
     })
+    
     res.render('index', {title: "home", msg : ""});
 });
 
@@ -58,8 +60,9 @@ app.post("/login", function(req, res) {
 
         connection.query(`SELECT * FROM users WHERE username = "${req.body.username}"`, function (err, rows) {
             if(!err) {
-
+                connection.end();
                 if(Object.keys(rows).length === 0) {
+                    
                     res.render('index', {title: "home", msg : "User not registered"})
                     return;
                 }
@@ -75,7 +78,6 @@ app.post("/login", function(req, res) {
                         res.cookie('access-token', accessToken, {
                             maxAge: 60*60*24*30*1000
                         });
-
                         console.log("Login Successful");
                         res.render('profile', {title: "profile", msg: "login successful"});
                         return;
@@ -89,7 +91,6 @@ app.post("/login", function(req, res) {
             } else {
                 console.log(err);
             }
-            connection.release();
         });
     });
 });
@@ -121,6 +122,7 @@ app.post("/register", function(req, res) {
         console.log(`connected as id ${connection.threadId}`);
 
         connection.query(`SELECT * FROM users WHERE username = "${req.body.username}" OR email = "${req.body.email}"`, function (err, rows) {
+            connection.end();
             if(!err) {
                 if(Object.keys(rows) === 0) {
                     res.render('index', {title: "home", msg : "User already registered"})
@@ -129,7 +131,7 @@ app.post("/register", function(req, res) {
             } else {
                 console.log(err);
             }
-            connection.release();
+            
         });
     });
 
@@ -147,12 +149,13 @@ app.post("/register", function(req, res) {
             console.log(`connected as id ${connection.threadId}`);
 
             connection.query('INSERT INTO users SET ?', newUser, function (err, rows) {
+                connection.release();
                 if(!err) {
                     console.log(rows);
                 } else {
                     console.log(err);
                 }
-                connection.release();
+                
             });
         });
         res.render('index', {title: "home", msg : "User Registered"});
@@ -203,12 +206,13 @@ app.post('/storePassword', validateToken, (req, res) => {
             console.log(`connected as id ${connection.threadId}`);
 
             connection.query('INSERT INTO passlist SET ?', pass_row, function (err, rows) {
+                connection.release();
                 if(!err) {
                     console.log(rows);
                 } else {
                     console.log(err);
                 }
-                connection.release();
+                
             });
         });
         res.render('profile', {title: "profile", msg: "password stored"});
@@ -240,11 +244,11 @@ app.post('/DeletePasswordWithTitle', validateToken, (req, res) => {
         // query(sqlstring, callback fun)
         connection.query('DELETE from passlist WHERE userid = ' + userid_ + " AND title = '" + req.body.title + "'", (err, rows) => {
              // return the conneciton to pool
-
+            connection.release()
             if(!err) {
                 // console.log(rows[0].staff_id)
                 // res.render('searchPassword', {rows: rows, title: "Search Password", msg : ""})
-                connection.release()
+                
                 
                 pool.getConnection((err, connection) => {
                     if(err) throw err
@@ -271,7 +275,6 @@ app.post('/DeletePasswordWithTitle', validateToken, (req, res) => {
             } else {
                 console.log(err)
             }
-            connection.release();
         })
     })
 
@@ -297,7 +300,6 @@ app.post('/searchPasswordWithTitle', validateToken, (req, res) => {
             } else {
                 console.log(err)
             }
-            connection.release();
         })
     })
 
